@@ -1,26 +1,23 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Cake from './components.jsx';
-import SVG from './svg.jsx';
-import CakeUser from './cakeUser.jsx';
-import ItemGenerator from './main.js';
-
-let startApp = new ItemGenerator();
+import SVG from './helpers/svg.jsx';
+import createStore from './store.jsx';
+import createService from './service.jsx';
+import Cake from './components/Cake.jsx';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            brief: startApp.store.brief
-        }
+        this.Store = new createStore();
+        this.Service = new createService(this.Store);
     }
 
     render () {
         return (
             <main>
                 <SVG />
-                <CakeUser build={ this.state.brief} />
+                <Cake build={ this.Store.brief } />
             </main>
         );
     }
