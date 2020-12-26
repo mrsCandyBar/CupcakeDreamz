@@ -151,17 +151,25 @@ class App extends React.Component<IAppProps, IAppState> {
     const { cupcake, matchCupcake, timeOut, leftAlignSvg, rightAlignSvg, classes, countDown } = this.state;
     const { flavour, holder, icing, sprinkles, topping, optional } = cupcake;
     const congratsAreInFavour = this.isEqualCupcake();
+    const previewCupcake = matchCupcake ? {
+      ...matchCupcake,
+      flavour: undefined,
+      holder: { ...matchCupcake.holder, colour: undefined },
+      icing: { ...matchCupcake.icing, colour: undefined },
+      sprinkles: { ...matchCupcake.sprinkles, colour: undefined }
+    } : {}
 
     const game = (
-      <Grid container className={classes.container} alignContent="space-between" alignItems="center" justify="space-between">
+      <Grid container className={`${classes.container} ${classes.maxScreen}`} alignContent="space-between" alignItems="center" justify="space-between">
 
         <Timer getTimeParams={this.callTime} successfull={congratsAreInFavour} />
 
         {((countDown !== 0) && matchCupcake) ? (
           <React.Fragment>
-            <Preview img={matchCupcake} updateClass={congratsAreInFavour}>
+            <Preview img={previewCupcake} updateClass={congratsAreInFavour}>
               <SvgTemplate visible={cupcake} name="cupcake" />
               <SvgTemplate visible={matchCupcake} name="match" />
+              <SvgTemplate visible={previewCupcake} name="preview" />
             </Preview>
 
             <Grid item xs={12}>
@@ -182,38 +190,40 @@ class App extends React.Component<IAppProps, IAppState> {
               </Grid>
             </Grid>
 
-            <DisplayIngredients
-              ingredients={[{ action: congratsAreInFavour ? undefined : () => this.swapOut('flavour'), visible: { flavour } }]}
-              updateClass={congratsAreInFavour}
-            />
+            <Grid container className={`${classes.container}`} alignContent="space-between" alignItems="center" justify="space-between">
+              <DisplayIngredients
+                ingredients={[{ action: congratsAreInFavour ? undefined : () => this.swapOut('flavour'), visible: { flavour } }]}
+                updateClass={congratsAreInFavour}
+              />
 
-            <DisplayIngredients
-              ingredients={[
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('holder.type'), visible: { holder: { type: holder.type }, svg: leftAlignSvg } },
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('holder.colour'), visible: { holder: { type: holder.type, colour: holder.colour }, svg: rightAlignSvg } }]}
-              updateClass={congratsAreInFavour}
-            />
+              <DisplayIngredients
+                ingredients={[
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('holder.type'), visible: { holder: { type: holder.type }, svg: leftAlignSvg } },
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('holder.colour'), visible: { holder: { type: holder.type, colour: holder.colour }, svg: rightAlignSvg } }]}
+                updateClass={congratsAreInFavour}
+              />
 
-            <DisplayIngredients
-              ingredients={[
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('icing.type'), visible: { icing: { type: icing.type }, svg: leftAlignSvg } },
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('icing.colour'), visible: { icing: { type: icing.type, colour: icing.colour }, svg: rightAlignSvg } }]}
-              updateClass={congratsAreInFavour}
-            />
+              <DisplayIngredients
+                ingredients={[
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('icing.type'), visible: { icing: { type: icing.type }, svg: leftAlignSvg } },
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('icing.colour'), visible: { icing: { type: icing.type, colour: icing.colour }, svg: rightAlignSvg } }]}
+                updateClass={congratsAreInFavour}
+              />
 
-            <DisplayIngredients
-              ingredients={[
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('sprinkles.type'), visible: { sprinkles: { type: sprinkles.type }, svg: leftAlignSvg } },
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('sprinkles.colour'), visible: { sprinkles: { type: sprinkles.type, colour: sprinkles.colour }, svg: rightAlignSvg } }]}
-              updateClass={congratsAreInFavour}
-            />
+              <DisplayIngredients
+                ingredients={[
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('sprinkles.type'), visible: { sprinkles: { type: sprinkles.type }, svg: leftAlignSvg } },
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('sprinkles.colour'), visible: { sprinkles: { type: sprinkles.type, colour: sprinkles.colour }, svg: rightAlignSvg } }]}
+                updateClass={congratsAreInFavour}
+              />
 
-            <DisplayIngredients
-              ingredients={[
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('optional'), visible: { icing: { type: icing.type }, topping: topping, optional: optional, svg: leftAlignSvg } },
-                { action: congratsAreInFavour ? undefined : () => this.swapOut('topping'), visible: { icing: { type: icing.type }, topping: topping, optional: optional, svg: rightAlignSvg } }]}
-              updateClass={congratsAreInFavour}
-            />
+              <DisplayIngredients
+                ingredients={[
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('optional'), visible: { icing: { type: icing.type }, topping: topping, optional: optional, svg: leftAlignSvg } },
+                  { action: congratsAreInFavour ? undefined : () => this.swapOut('topping'), visible: { icing: { type: icing.type }, topping: topping, optional: optional, svg: rightAlignSvg } }]}
+                updateClass={congratsAreInFavour}
+              />
+            </Grid>
           </React.Fragment>
 
         ) : (

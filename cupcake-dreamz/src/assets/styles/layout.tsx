@@ -4,17 +4,45 @@ import { color } from './colors';
 export function pageStyles(theme: Theme) {
     return createStyles({
         container: {
-            backgroundColor: '#222222',
+            overflow: 'hidden',
+            position: 'relative',
+            width: '100vw',
             height: '100vh',
             textAlign: 'center',
             maxWidth: '980px',
-            margin: '0 auto'
+            padding: '0px 20px',
+            margin: '0 auto',
+            zIndex: 10,
         },
+        maxScreen: {
+            maxWidth: '100vw',
+        },
+        previewImage: {
+            height: '25vh',
+            position: 'absolute',
+            left: '0vh',
+            right: '45%',
+            top: '20vh',
+            padding: '0.5vh 0px',
+        },
+        previewShadow: {
+            position: 'absolute',
+            zIndex: -1,
+            left: '-45vw',
+            right: 0,
+            top: '40vh',
+            width: '150vw',
+            height: '100vh',
+            background: color.black,
+            transform: 'rotate(5deg)'
+        },
+
         imgLarge: {
             height: '59vh',
             padding: '0.5vh 0px',
             transition: '1s ease-in-out',
             position: 'relative',
+            marginTop: '20vh',
             zIndex: 5,
             '&.bigger': {
                 marginBottom: '5vh',
@@ -33,7 +61,7 @@ export function pageStyles(theme: Theme) {
             },
         },
         imgSmall: {
-            height: '18vh',
+            height: '16vh',
             marginTop: '1vh',
             transition: '1s ease-in-out',
             '.withoutActions &': {
@@ -148,7 +176,7 @@ for (let i = 0; i < 50; i++) {
                 ${Math.floor(Math.random() * 80) - 50 + 'px'}`
         },
         to: {
-            top: `${Math.floor(Math.random() * 5) + 70 + 'vh'}`,
+            top: `${Math.floor(Math.random() * 5) + 60 + 'vh'}`,
             opacity: 1,
             transform: `rotate(${Math.random() * 720 + 45}deg)`,
             margin: `${Math.floor(Math.random() * 80) + 1 + 'px'}
@@ -169,17 +197,19 @@ export function countStyles(theme: Theme) {
             fontWeight: 'bold',
             top: 'calc(50vh - 15vh)',
             color: '#ffffff',
-            zIndex: 10
+            zIndex: 10,
         },
         timerStyle: {
             position: 'absolute',
-            left: 0,
+            left: '0.15em',
             right: 0,
-            fontSize: '5vh',
+            fontSize: '60vh',
             fontWeight: 'bold',
-            top: 120,
-            color: color.background,
-            zIndex: 10
+            top: 15,
+            letterSpacing: '0.15em',
+            color: color.black,
+            zIndex: -1,
+            //transform: `rotate(30deg)`,
         },
         confetti: {
             position: 'absolute',

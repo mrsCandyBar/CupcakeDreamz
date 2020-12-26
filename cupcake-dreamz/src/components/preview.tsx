@@ -42,21 +42,22 @@ class Preview extends React.Component<IPreviewProps, IPreviewState> {
     render() {
         const { img, classes } = this.props;
         const { animateClass, updateClass } = this.state;
-
+        
         const classList = `
-            ${classes.imgSmall} 
+            ${classes.previewImage} 
             ${updateClass ? 'invisible' : 'visible'}
             ${animateClass ? (updateClass ? 'animateUp' : 'animateDown') : ''}
         `;
 
         return (
-            <Grid item xs={12} className={`${classes.holdPosition} ${updateClass ? 'withoutActions' : 'withActions'}`}>
+            <Grid item xs={12} className={`${classes.previewImage}`}>
                 <Grid container alignItems="center" alignContent="center" justify="center">
                     <Grid item xs={12} className={classList}>
-                        <Svg visible={img} name="match" />
+                        <Svg visible={img} name="preview" />
                         {this.props.children}
                     </Grid>
                 </Grid>
+                <div className={`${classes.previewShadow}`}></div>
             </Grid>
         );
     }

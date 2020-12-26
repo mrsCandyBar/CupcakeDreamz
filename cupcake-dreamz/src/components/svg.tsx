@@ -60,7 +60,7 @@ class SVG extends React.Component<ISVGProps, ISVGState> {
         return (
             <svg width={svg ? svg.width : '100%'} height={svg ? svg.height : '100%'} viewBox={svg ? svg.viewBox : "0 0 450 600"} x="0" y="0" preserveAspectRatio={svg && svg.preserveAspectRatio ? svg.preserveAspectRatio : "xMidYMid meet"}>
                 <RenderSVG visibleList={[
-                    (flavour && 'cake'),
+                    ((flavour || this.props.name === "preview") && 'cake'),
                     (holder && (holder.colour ? `svg_holder_${holder.type}_colour` : `svg_holder_${holder.type}`)),
                     (icing && optional && icing.type === 'flared' && `svg_tall_big_wafer`),
                     (icing && optional && icing.type === 'swirl' && `svg_wafers`),

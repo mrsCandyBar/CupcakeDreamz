@@ -42,7 +42,6 @@ class Confetti extends React.Component<IConfettiProps, IConfettiState> {
         const { classes } = this.state;
         const CreateConfetti = [];
         for (let i = 0; i < 200; i++) {
-            console.log("count >>>>>", i)
             CreateConfetti.push(<div key={i} className={`${classes.confetti} ${classes.confetti}_${i}`} />)
         }
 

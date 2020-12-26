@@ -1,7 +1,7 @@
 export const Flavour = [
     "vanilla",
     "caramelDarker",
-    "brown"
+    "brown",
 ]
 export const HolderType = [
     "dotted",
